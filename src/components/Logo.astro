@@ -1,0 +1,19 @@
+---
+interface Props {
+  color?: 'burgundy' | 'parchment' | 'catawba';
+  width?: number;
+}
+const { color = 'burgundy', width = 160 } = Astro.props;
+const fillColor = {
+  burgundy: '#6B1C2E',
+  parchment: '#F5F0E8',
+  catawba: '#C97B8A',
+}[color];
+const height = Math.round((width / 300) * 48);
+---
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 48" width={width} height={height} role="img" aria-label="Ripe Grapes">
+  <title>Ripe Grapes</title>
+  <text font-family="'Playfair Display', Georgia, serif" font-weight="700" fill={fillColor} dominant-baseline="alphabetic">
+    <tspan x="2" y="38" font-size="38" font-style="italic">Ripe Grapes</tspan>
+  </text>
+</svg>

@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+).slice(0, 3);
+---
+
+<Layout>
+  <!-- NAV -->
+  <nav style="background-color: #6B1C2E;" class="px-6 py-5">
+    <div class="max-w-[1100px] mx-auto flex items-center justify-between">
+      <a href="/"><Logo color="parchment" width={160} /></a>
+      <div class="flex items-center gap-8">
+        <a href="/blog" style="color: #E8B4BE; font-family: 'Lato', sans-serif;" class="text-sm tracking-wide hover:opacity-80 transition-opacity">Articles</a>
+        <a href="#about" style="color: #E8B4BE; font-family: 'Lato', sans-serif;" class="text-sm tracking-wide hover:opacity-80 transition-opacity">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="background-color: #6B1C2E;" class="px-6 pb-28 pt-20">
+    <div class="max-w-[760px] mx-auto text-center">
+      <p style="color: #C97B8A; font-family: 'Lato', sans-serif;" class="text-sm font-bold uppercase tracking-widest mb-6">Wine for people who just love wine</p>
+      <h1 style="color: #F5F0E8; font-family: 'Playfair Display', serif;" class="text-5xl md:text-6xl font-bold leading-tight mb-8">
+        You don't need to be an expert.<br />You just need a good glass.
+      </h1>
+      <p style="color: #E8B4BE; font-family: 'Lato', sans-serif;" class="text-xl leading-relaxed mb-10 max-w-[580px] mx-auto">
+        Honest writing about wine from someone still learning. No gatekeeping, no scores out of 100, no pretending. Just the good stuff.
+      </p>
+      <a href="/blog" style="background-color: #C97B8A; color: #F5F0E8; font-family: 'Lato', sans-serif;" class="inline-block font-bold text-base px-8 py-4 rounded hover:opacity-90 transition-opacity">
+        Start Reading
+      </a>
+    </div>
+  </section>
+
+  <!-- WAVE DIVIDER -->
+  <div style="background-color: #6B1C2E;" class="overflow-hidden leading-none">
+    <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:60px;">
+      <path d="M0,0 C300,60 900,0 1200,40 L1200,60 L0,60 Z" fill="#F5F0E8"/>
+    </svg>
+  </div>
+
+  <!-- INTRO -->
+  <section style="background-color: #F5F0E8;" class="px-6 py-24">
+    <div class="max-w-[760px] mx-auto">
+      <p style="color: #6B1C2E; font-family: 'Lato', sans-serif;" class="text-sm font-bold uppercase tracking-widest mb-6">Why this exists</p>
+      <h2 style="font-family: 'Playfair Display', serif; color: #1C1410;" class="text-4xl font-bold leading-tight mb-8">
+        Most wine writing talks down to you. This doesn't.
+      </h2>
+      <div style="font-family: 'Lato', sans-serif; color: #4A3728;" class="space-y-5 text-lg leading-relaxed">
+        <p>
+          There was a man named George Lonz who built a wine castle on Middle Bass Island in Lake Erie. During Prohibition, he sold grape juice with instructions for making "wine vinegar." The step before that, of course, is wine.
+        </p>
+        <p>
+          He understood something the wine world often forgets: wine is for people. It's for the table, the porch, the party that's just about to start. Not for collecting. Not for showing off.
+        </p>
+        <p>
+          That's what Ripe Grapes is about. I'm learning as I go, and I'm writing it all down. If you love wine but the world around it feels like a club you weren't invited to — you're in the right place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECENT POSTS -->
+  {posts.length > 0 && (
+    <section style="background-color: #EAE3D2;" class="px-6 py-24">
+      <div class="max-w-[1100px] mx-auto">
+        <p style="color: #6B1C2E; font-family: 'Lato', sans-serif;" class="text-sm font-bold uppercase tracking-widest mb-4">Latest</p>
+        <h2 style="font-family: 'Playfair Display', serif; color: #1C1410;" class="text-4xl font-bold mb-12">Recent Articles</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <a href={`/blog/${post.id}`} class="group block">
+              <div style="background-color: #F5F0E8; border: 1px solid #D9D0C0;" class="p-8 rounded hover:shadow-md transition-shadow h-full">
+                {post.data.category && (
+                  <p style="color: #C97B8A; font-family: 'Lato', sans-serif;" class="text-xs font-bold uppercase tracking-widest mb-3">{post.data.category}</p>
+                )}
+                <h3 style="font-family: 'Playfair Display', serif; color: #1C1410;" class="text-xl font-bold leading-snug mb-3 group-hover:text-[#6B1C2E] transition-colors">{post.data.title}</h3>
+                <p style="color: #7A6E68; font-family: 'Lato', sans-serif;" class="text-sm leading-relaxed">{post.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div class="mt-10">
+          <a href="/blog" style="color: #6B1C2E; font-family: 'Lato', sans-serif; border-bottom: 2px solid #C97B8A;" class="font-bold text-base pb-1 hover:opacity-70 transition-opacity">
+            All articles →
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- WHAT YOU'LL FIND -->
+  <section style="background-color: #F5F0E8;" class="px-6 py-24">
+    <div class="max-w-[1100px] mx-auto">
+      <p style="color: #6B1C2E; font-family: 'Lato', sans-serif;" class="text-sm font-bold uppercase tracking-widest mb-4">What's here</p>
+      <h2 style="font-family: 'Playfair Display', serif; color: #1C1410;" class="text-4xl font-bold mb-12">Wine without the homework</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {[
+          { title: 'What to Drink', desc: 'Bottles worth buying, occasions worth planning, and honest takes on what\'s actually good.' },
+          { title: 'How to Understand It', desc: 'Regions, grapes, and the stuff that actually matters — explained without the condescension.' },
+          { title: 'Where to Find It', desc: 'Wine clubs, retailers, and hidden gems. The ones worth your money and the ones to skip.' },
+        ].map(({ title, desc }) => (
+          <div style="border-top: 3px solid #C97B8A;" class="pt-6">
+            <h3 style="font-family: 'Playfair Display', serif; color: #1C1410;" class="text-xl font-bold mb-3">{title}</h3>
+            <p style="color: #7A6E68; font-family: 'Lato', sans-serif;" class="text-base leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="background-color: #6B1C2E;" class="px-6 py-24">
+    <div class="max-w-[760px] mx-auto">
+      <p style="color: #C97B8A; font-family: 'Lato', sans-serif;" class="text-sm font-bold uppercase tracking-widest mb-6">About</p>
+      <h2 style="font-family: 'Playfair Display', serif; color: #F5F0E8;" class="text-4xl font-bold mb-8">I'm Marc. I'm figuring this out too.</h2>
+      <div style="font-family: 'Lato', sans-serif; color: #E8B4BE;" class="space-y-5 text-lg leading-relaxed">
+        <p>
+          I'm a marketer from Columbus, Ohio, and I've been drinking wine for years without really knowing what I'm talking about. I love it anyway. I love the stories behind it, the places it comes from, the way a good bottle makes an ordinary Tuesday feel like something.
+        </p>
+        <p>
+          George Lonz is my inspiration. He sold wine on an island during Prohibition, built a castle, threw parties, and made the whole thing feel like a celebration. That's the spirit here. Less lecture, more party.
+        </p>
+        <p>
+          I'm learning. I'm writing it down. Come along.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background-color: #4A1220;" class="px-6 py-10">
+    <div class="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <Logo color="parchment" width={120} />
+      <p style="color: #C97B8A; font-family: 'Lato', sans-serif;" class="text-sm">
+        © {new Date().getFullYear()} Ripe Grapes. For the love of wine.
+      </p>
+    </div>
+  </footer>
+</Layout>
