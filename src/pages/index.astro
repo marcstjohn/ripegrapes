@@ -103,7 +103,7 @@ const posts = (await getCollection('blog')).sort(
           { title: 'How to Understand It', desc: 'Regions, grapes, and the stuff that actually matters — explained without the condescension.' },
           { title: 'Where to Find It', desc: 'Wine clubs, retailers, and hidden gems. The ones worth your money and the ones to skip.' },
         ].map(({ title, desc }) => (
-          <div style="border-top: 3px solid #C97B8A;" class="pt-6">
+          <div style="border-top: 3px solid #6B7C4A;" class="pt-6">
             <h3 style="font-family: 'Playfair Display', serif; color: #1C1410;" class="text-xl font-bold mb-3">{title}</h3>
             <p style="color: #7A6E68; font-family: 'Lato', sans-serif;" class="text-base leading-relaxed">{desc}</p>
           </div>
@@ -135,7 +135,7 @@ const posts = (await getCollection('blog')).sort(
   <footer style="background-color: #4A1220;" class="px-6 py-10">
     <div class="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <Logo color="parchment" width={120} />
-      <p style="color: #C97B8A; font-family: 'Lato', sans-serif;" class="text-sm">
+      <p style="color: #6B7C4A; font-family: 'Lato', sans-serif;" class="text-sm">
         © {new Date().getFullYear()} Ripe Grapes. For the love of wine.
       </p>
     </div>
